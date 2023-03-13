@@ -30,7 +30,6 @@ items = wait(driver, 10).until(
 for item in items:
     # find name
     name = item.find_element(By.XPATH, './/span[@class="a-size-medium a-color-base a-text-normal"]')
-    product_name.index(0)
     product_name.append(name.text)
 
 #name == 'bestseller'

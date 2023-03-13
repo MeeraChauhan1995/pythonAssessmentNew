@@ -29,7 +29,7 @@ driver.find_element(By.XPATH, '//*[@id="nav-flyout-ya-newCust"]/a').click()
 driver.find_element(By.ID, 'ap_customer_name').send_keys('Meera Chauhan')
 
 #driver.find_element(By.ID, 'ap_email').send_keys('6476875247')
-driver.find_element(By.ID, 'ap_email').send_keys('mrc@gmail.com')
+driver.find_element(By.ID, 'ap_email').send_keys('mrc6467@gmail.com')
 
 
 driver.find_element(By.ID, 'ap_password').send_keys('chauhan@1095')
@@ -42,12 +42,14 @@ driver.find_element(By.ID, 'continue').click()
 #capture  error message using phone number
 #errmessage = driver.find_element(By.XPATH, '//*[@id="auth-error-message-box"]').text
 
-
+#iframe
+driver.find_element(By.XPATH, "@id = cvf-aamation-challenge-iframe")
+time.sleep(20)
 #capture  error message using email id
 message = driver.find_element(By.XPATH, '//*[@class="a-box a-alert a-alert-warning a-spacing-base"]').text
 
 #print(errmessage)
 
 print(message)
-assert "Successfully login "in message
+assert "Successfully" in message
 driver.quit()

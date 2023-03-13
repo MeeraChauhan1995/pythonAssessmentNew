@@ -1,13 +1,8 @@
 import time
-
 from selenium import webdriver
-from selenium.webdriver.chrome import options
 from selenium.webdriver.chrome.service import Service
-
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.select import Select
-from selenium.webdriver.support.ui import WebDriverWait as wait
-from selenium.webdriver.support import expected_conditions as EC
+
 
 service_obj = Service("C:/Meera/chromedriver_win32/chromedriver.exe")
 driver = webdriver.Chrome(service= service_obj)
@@ -22,27 +17,16 @@ search_button.click()
 
 product_name = []
 
-#fetch product list
-items = wait(driver, 5).until(
-    EC.presence_of_all_elements_located((By.XPATH, '//div[contains(@class, "s-result-item s-asin")]')))
-
-for item in items:
-    # find name
-    name = item.find_element(By.XPATH, './/span[@class="a-size-medium a-color-base a-text-normal"]')
-    product_name.append(name.text)
-    break
-print(product_name)
-#using filter
+#search products by dropdown
 driver.find_element(By.XPATH, './/span[@class="a-button-text a-declarative"]').click()
-dropdowns = driver.find_elements(By.CLASS_NAME, 'a-popover-wrapper')
-#dropdowns = driver.find_element(By.CLASS_NAME,"a-dropdown-link").get_attribute("value")
+dropdowns = driver.find_elements(By.XPATH, '//li[@class="a-dropdown-item"]')
 
 time.sleep(2)
 for dropdown in dropdowns:
     print(dropdown.text)
-    if dropdown.get_attribute('data-value') == "Newest Arrivals":
+    if dropdown.text == "Newest Arrivals":
         dropdown.click()
+        time.sleep(2)
         break
 
-time.sleep(2)
 driver.quit()
